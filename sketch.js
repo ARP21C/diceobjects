@@ -2,6 +2,7 @@ let dice = [];
 let numberOfDice = 5;
 let keyPressCount = 0;
 let message = ""; // Variable to store the message
+let gameActive = true; //variable to track if the game is active
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -35,12 +36,10 @@ function draw() {
   }
 }
 
-function mouseClicked() {
-  // Uncomment and implement the freeze logic if needed
-}
+
 
 function keyPressed() {
-  if (keyPressCount < 5) {
+  if (keyPressCount < 5 && gameActive) { // Only allow rolling if the game is active
     shakeDice();
     keyPressCount++;
   }
@@ -51,6 +50,8 @@ function deviceShaken() {
 }
 
 function shakeDice() {
+  if (!gameActive) return; // Exit if the game is not active
+
   let list = "values: ";
   let counts = {}; // Object to hold counts of each die value
 
@@ -78,6 +79,7 @@ function checkForThreeOfAKind(counts) {
     if (counts[value] >= 3) {
       // If there are three or more of the same value, update the message
       message = "YOU WIN!!" ;
+      gameActive = false; //stops game if won
       break; // Exit after setting the message
     }
   }
