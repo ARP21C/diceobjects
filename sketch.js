@@ -43,6 +43,12 @@ function keyPressed() {
     shakeDice();
     keyPressCount++;
   }
+
+  //check if keyPressCount has reached 5
+  if (keyPressCount === 5) {
+    message = "YOU LOSE";
+    gameActive = false; //stops game
+  }
 }
 
 function deviceShaken() {
