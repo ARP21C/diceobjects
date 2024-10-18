@@ -1,63 +1,82 @@
 let dice = [];
 let numberOfDice = 5;
 let keyPressCount = 0;
+let message = ""; // Variable to store the message
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < numberOfDice; i++) {
-    dice[i] = new Die(50); // argument is the size of the die
+    dice[i] = new Die(50); // Argument is the size of the die
   }
 }
 
 function draw() {
-  background("darkolivegreen");
+  background("lightblue");
   
-  // loop over the array and place+display each die
+  // Loop over the array and place+display each die
   for (let i = 0; i < dice.length; i++) {
-    const die = dice[i]; // 'die' is a temporary variable for the current array item
-    die.place(die.size*1.2*i+die.size, die.size*2); // place the die neatly in the row
-    die.display(); // actually draw it on screen
+    const die = dice[i];
+    die.place(die.size * 1.2 * i + die.size, die.size * 2);
+    die.display(); // Actually draw it on screen
   }
 
   textSize(32);
   fill(0);
   text("Keys pressed: " + keyPressCount, 200, height / 2);
 
+  // Display the message if it exists
+  if (message) {
+    fill(255, 0, 0); // Red text
+    textSize(48);
+    textAlign(CENTER, CENTER);
+    text(message, width / 2, height / 2); // Display the message
+  }
 }
 
 function mouseClicked() {
-  // loop over the array of dice...
-  for (let i = 0; i < dice.length; i++) {
-    const die = dice[i];
-    // if the cursor is over the current die, freeze/unfreeze that die
-    if (die.isTouched(mouseX,mouseY)) {
-      die.toggleFreeze();
-    }
-  }
+  // Uncomment and implement the freeze logic if needed
 }
 
-// for computers...
 function keyPressed() {
   if (keyPressCount < 5) {
-  shakeDice();
-  keyPressCount++;
+    shakeDice();
+    keyPressCount++;
   }
 }
 
-// for phones...
 function deviceShaken() {
   shakeDice();
 }
 
-// loop over the array of dice and try to roll each one in turn
-// (note that a die won't actually roll if it's frozen)
-// also, output the list of values to the console
 function shakeDice() {
   let list = "values: ";
+  let counts = {}; // Object to hold counts of each die value
+
+  // Reset the message for new rolls
+  message = ""; 
+
   for (let i = 0; i < dice.length; i++) {
     const die = dice[i];
-    die.roll();
-    list = list + die.value + " ";
+    die.roll(); // Roll the die to get a new value
+    list += die.value + " "; // Add the value to the list
+
+    // Count occurrences of each value
+    counts[die.value] = (counts[die.value] || 0) + 1;
   }
-  console.log(list);
+
+  console.log(list); // Log the rolled values
+  
+  // Check for three of a kind and update the message
+  checkForThreeOfAKind(counts);
+}
+
+// Function to check for three of a kind and update the message
+function checkForThreeOfAKind(counts) {
+  for (let value in counts) {
+    if (counts[value] >= 3) {
+      // If there are three or more of the same value, update the message
+      message = "Three of a kind: " + value;
+      break; // Exit after setting the message
+    }
+  }
 }
