@@ -1,5 +1,6 @@
 let dice = [];
 let numberOfDice = 5;
+let keyPressCount = 0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -18,6 +19,10 @@ function draw() {
     die.display(); // actually draw it on screen
   }
 
+  textSize(32);
+  fill(0);
+  text("Keys pressed: " + keyPressCount, 200, height / 2);
+
 }
 
 function mouseClicked() {
@@ -33,7 +38,10 @@ function mouseClicked() {
 
 // for computers...
 function keyPressed() {
+  if (keyPressCount < 5) {
   shakeDice();
+  keyPressCount++;
+  }
 }
 
 // for phones...
