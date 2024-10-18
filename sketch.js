@@ -3,7 +3,7 @@ let numberOfDice = 5;
 let keyPressCount = 0;
 let message = ""; // Variable to store the message
 let gameActive = true; //variable to track if the game is active
-
+let showRules = true; // variables to control the rules pop up
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
@@ -23,9 +23,14 @@ function draw() {
   }
 
   strokeWeight(0);
-  textSize(32);
+  textSize(24);
   fill(0);
   text("Keys pressed: " + keyPressCount, 170, 150);
+
+  //display the rules pop up if showrules is true
+  if (showRules) {
+    displayRules();
+  }
 
   // Display the message if it exists
   if (message) {
@@ -47,6 +52,11 @@ function draw() {
 
 
 function keyPressed() {
+  if (showRules) {
+    showRules = false; //hides rules pop up
+    return;
+  }
+
   if (keyPressCount < 5 && gameActive) { // Only allow rolling if the game is active
     shakeDice();
     keyPressCount++;
@@ -98,3 +108,12 @@ function checkForThreeOfAKind(counts) {
     }
   }
 }
+
+//function to display rules pop up
+function displayRules() {
+  fill(0); // Black text
+  textSize(24);
+  textAlign(CENTER, CENTER);
+  text("Rules of the Game:\n\n- Press a key to roll the dice.\n- Try to get three of a kind!\n- You lose if you press a key 5 times without winning.", width / 2, height / 2);
+}
+
