@@ -42,6 +42,7 @@ class Die {
             fill("black");
         }
         textSize(30);
+        strokeWeight(0);
         text(this.value, this.x, this.y, this.size, this.size);
     }
 

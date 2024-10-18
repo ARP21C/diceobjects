@@ -21,9 +21,10 @@ function draw() {
     die.display(); // Actually draw it on screen
   }
 
+  strokeWeight(0);
   textSize(32);
   fill(0);
-  text("Keys pressed: " + keyPressCount, 200, height / 2);
+  text("Keys pressed: " + keyPressCount, 170, 150);
 
   // Display the message if it exists
   if (message) {
