@@ -54,7 +54,7 @@ function draw() {
 function keyPressed() {
   if (showRules) {
     showRules = false; //hides rules pop up
-    return;
+    
   }
 
   if (keyPressCount < 5 && gameActive) { // Only allow rolling if the game is active
