@@ -4,6 +4,7 @@ let keyPressCount = 0;
 let message = ""; // Variable to store the message
 let gameActive = true; //variable to track if the game is active
 
+
 function setup() {
   createCanvas(windowWidth, windowHeight);
   for (let i = 0; i < numberOfDice; i++) {
@@ -12,7 +13,7 @@ function setup() {
 }
 
 function draw() {
-  background("lightblue");
+  background("lightgrey");
   
   // Loop over the array and place+display each die
   for (let i = 0; i < dice.length; i++) {
