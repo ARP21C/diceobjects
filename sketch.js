@@ -27,11 +27,17 @@ function draw() {
 
   // Display the message if it exists
   if (message) {
-    fill(0, 255, 0); // Green text
-    stroke(0); //black stroke
-    strokeWeight(2);
     textSize(48);
     textAlign(CENTER, CENTER);
+
+    if (message.includes("YOU WIN!!")) {
+      fill(0, 255, 0); //green text for you win
+    } else {
+      fill(255, 0, 0); //red text for you lose
+    }
+
+    stroke(0);
+    strokeWeight(2);
     text(message, width / 2, height / 2); // Display the message
   }
 }
@@ -46,7 +52,7 @@ function keyPressed() {
 
   //check if keyPressCount has reached 5
   if (keyPressCount === 5) {
-    message = "YOU LOSE";
+    message = "YOU LOSE :(";
     gameActive = false; //stops game
   }
 }
