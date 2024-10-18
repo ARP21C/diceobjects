@@ -26,7 +26,9 @@ function draw() {
 
   // Display the message if it exists
   if (message) {
-    fill(255, 0, 0); // Red text
+    fill(0, 255, 0); // Green text
+    stroke(0); //black stroke
+    strokeWeight(2);
     textSize(48);
     textAlign(CENTER, CENTER);
     text(message, width / 2, height / 2); // Display the message
@@ -75,7 +77,7 @@ function checkForThreeOfAKind(counts) {
   for (let value in counts) {
     if (counts[value] >= 3) {
       // If there are three or more of the same value, update the message
-      message = "Three of a kind: " + value;
+      message = "YOU WIN!!" ;
       break; // Exit after setting the message
     }
   }
